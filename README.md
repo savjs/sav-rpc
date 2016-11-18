@@ -1,2 +1,2 @@
 # sav-rpc
-savjs rpc library
+savjs rpc
