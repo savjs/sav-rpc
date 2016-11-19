@@ -7,7 +7,8 @@
   "jsnext:main": "dist/sav-rpc.es.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "npm run build && ava"
+    "lint": "standard rollup.config.js test/** src/**",
+    "test": "npm run lint && npm run build && ava"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,6 @@
   },
   "homepage": "https://github.com/savjs/sav-rpc#readme",
   "dependencies": {
-    "sav-util": "^0.0.2"
+    "sav-util": "^0.0.3"
   }
 }
