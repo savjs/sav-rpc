@@ -1,6 +1,6 @@
 {
   "name": "sav-rpc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "rpc for savjs",
   "main": "dist/sav-rpc.cjs.js",
   "module": "dist/sav-rpc.es.js",

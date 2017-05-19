@@ -213,30 +213,40 @@ function makeReceiver (handle) {
 };
 
 function makeSender (handle) {
-  if (handle.postMessage) {
-    return {
-      send: function (data, origin) {
-        handle.postMessage(data, origin)
+  if (handle) {
+    if (handle.postMessage) {
+      return {
+        send: function (data, origin) {
+          handle.postMessage(data, origin)
+        }
+      }
+    } else if (handle.sendToHost) { // electron WebView
+      return {
+        send: function (data) {
+          handle.sendToHost('message', data)
+        }
+      }
+    } else if (handle.send) { // electron WebView
+      return {
+        send: function (data) {
+          handle.send('message', data)
+        }
       }
     }
-  } else if (handle.sendToHost) { // electron WebView
-    return {
-      send: function (data) {
-        handle.sendToHost('message', data)
-      }
-    }
-  } else if (handle.send) { // electron WebView
-    return {
-      send: function (data) {
-        handle.send('message', data)
-      }
-    }
+  }
+  return {
+    send: function () {},
+    isInvalid: true
   }
 }
 
 function Sender (owner, handle) {
   this._sender = makeSender(handle)
   this._owner = owner
+}
+
+Sender.prototype.isValid = function () {
+  return !this._sender.isInvalid
 }
 
 Sender.prototype.send = function (action, data, cb, keepAlive) {
