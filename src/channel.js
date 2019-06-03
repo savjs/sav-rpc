@@ -1,8 +1,3 @@
-/*
- * @Description     通信信道
- * @File       channel.js
- * @Auth       jetiny@hfjy.com
- */
 
 import { isObject, isFunction, isPromiseLike } from 'sav-util'
 
